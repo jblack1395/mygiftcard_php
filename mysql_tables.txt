@@ -1,0 +1,35 @@
+CREATE DATABASE mygiftcard;
+USE mygiftcard;
+
+CREATE TABLE IF NOT EXISTS `customers` (
+ `customerNumber` int(11) NOT NULL AUTO_INCREMENT,
+ `customerName` varchar(50) NOT NULL,
+ `email` varchar(50) NOT NULL,
+ `address` varchar(50) NOT NULL,
+ `city` varchar(50) NOT NULL,
+ `state` varchar(50) DEFAULT NULL,
+ `postalCode` varchar(15) DEFAULT NULL,
+ `country` varchar(50) NOT NULL,
+`password` varchar(24) NOT NULL,
+ PRIMARY KEY (`customerNumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=172 ;
+
+INSERT INTO `customers` (`customerNumber`, `customerName`, `email`, `address`, `city`, `state`, `postalCode`, `country`, `password`) VALUES
+(103, `customer 1`, `customer1@gmail.com`, `54, customer1 Street`, `Nantes`, NULL, `44000`, `France`, PASSWORD(`customer1`)),
+(112, `Customer 2`, `LasVegas@gmail.com`, `8489 Strong St.`, `Las Vegas`, `NV`, `83030`, `USA`, PASSWORD(`customer2`)),
+(114, `Customer 3`, `Melbourne@gmail.com`, `636 St Kilda Road`, `Melbourne`, `Victoria`, `3004`, `Australia`, PASSWORD(`customer3`)),
+(119, `Customer 4`, `Nantes@gmail.com`, `67, rue des Cinquante Otages`, `Nantes`, NULL, `44000`, `France`, PASSWORD(`customer4`)),
+(121, `Customer 5`, `Stavern@gmail.com`, `Erling Skakkes gate 78`, `Stavern`, NULL, `4110`, `Norway`, PASSWORD(`customer5`))
+
+CREATE TABLE IF NOT EXISTS `giftcards` (
+`giftcardNumber` int(11) NOT NULL AUTO_INCREMENT,
+`giftcardMessage` varchar(200) NOT NULL,
+`giftcardRecipient` varchar(50) NOT NULL,
+PRIMARY KEY (`giftcardNumber`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=172 ;
+
+ALTER TABLE giftcards
+ADD CONSTRAINT FK_customer 
+FOREIGN KEY (customerid) REFERENCES customer(customerNumber) 
+ON UPDATE CASCADE
+ON DELETE CASCADE;
